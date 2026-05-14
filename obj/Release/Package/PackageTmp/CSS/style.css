@@ -1,0 +1,17 @@
+﻿body {
+    background: #f4f7fc;
+    font-family: Arial;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+}
+
+.sidebar {
+    position: fixed;
+}
+
+.content {
+    margin-left: 250px;
+}

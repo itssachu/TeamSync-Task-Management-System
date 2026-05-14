@@ -1,0 +1,21 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# User files
+*.user
+*.suo
+
+# Packages
+packages/
+
+# Publish
+publish/
+
+# Database
+*.mdf
+*.ldf
+
+# Logs
+*.log
