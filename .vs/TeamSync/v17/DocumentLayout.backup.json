@@ -3,32 +3,40 @@
   "WorkspaceRootPath": "S:\\Project\\TeamSync\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\admin\\dashboard.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:admin\\dashboard.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\user\\profile.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:user\\profile.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|S:\\Project\\TeamSync\\homepage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:homepage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\user\\profile.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:user\\profile.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\user\\myprofile.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:user\\myprofile.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\admin\\dashboard.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:admin\\dashboard.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\user\\myprofile.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:user\\myprofile.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\masterpage.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:masterpage.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\masterpage.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:masterpage.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\usermaster.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:usermaster.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|s:\\project\\teamsync\\usermaster.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:usermaster.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|S:\\Project\\TeamSync\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|S:\\Project\\TeamSync\\helpers\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8E986412-A852-4E77-B92A-5D1BDC6F2C16}|TeamSync.csproj|solutionrelative:helpers\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,31 +46,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DatabaseHelper.cs",
-              "DocumentMoniker": "S:\\Project\\TeamSync\\Helpers\\DatabaseHelper.cs",
-              "RelativeDocumentMoniker": "Helpers\\DatabaseHelper.cs",
-              "ToolTip": "S:\\Project\\TeamSync\\Helpers\\DatabaseHelper.cs",
-              "RelativeToolTip": "Helpers\\DatabaseHelper.cs",
-              "ViewState": "AgIAAN4AAAAAAAAAAAAiwPYAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T18:24:15.887Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Web.config",
               "DocumentMoniker": "S:\\Project\\TeamSync\\Web.config",
               "RelativeDocumentMoniker": "Web.config",
               "ToolTip": "S:\\Project\\TeamSync\\Web.config",
               "RelativeToolTip": "Web.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
               "WhenOpened": "2026-05-12T18:04:58.384Z",
               "IsPinned": true,
@@ -70,68 +64,112 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Login.aspx.cs",
-              "DocumentMoniker": "S:\\Project\\TeamSync\\Login.aspx.cs",
-              "RelativeDocumentMoniker": "Login.aspx.cs",
-              "ToolTip": "S:\\Project\\TeamSync\\Login.aspx.cs",
-              "RelativeToolTip": "Login.aspx.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA1wB8AAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T16:40:21.07Z",
+              "DocumentIndex": 1,
+              "Title": "HomePage.aspx",
+              "DocumentMoniker": "S:\\Project\\TeamSync\\HomePage.aspx",
+              "RelativeDocumentMoniker": "HomePage.aspx",
+              "ToolTip": "S:\\Project\\TeamSync\\HomePage.aspx",
+              "RelativeToolTip": "HomePage.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-05-14T17:41:22.188Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Profile.aspx.cs",
-              "DocumentMoniker": "S:\\Project\\TeamSync\\User\\Profile.aspx.cs",
-              "RelativeDocumentMoniker": "User\\Profile.aspx.cs",
-              "ToolTip": "S:\\Project\\TeamSync\\User\\Profile.aspx.cs",
-              "RelativeToolTip": "User\\Profile.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T17:54:51.092Z",
+              "DocumentIndex": 4,
+              "Title": "MasterPage.Master",
+              "DocumentMoniker": "S:\\Project\\TeamSync\\MasterPage.Master",
+              "RelativeDocumentMoniker": "MasterPage.Master",
+              "ToolTip": "S:\\Project\\TeamSync\\MasterPage.Master",
+              "RelativeToolTip": "MasterPage.Master",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-05-15T17:46:08.144Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Profile.aspx",
-              "DocumentMoniker": "S:\\Project\\TeamSync\\User\\Profile.aspx",
-              "RelativeDocumentMoniker": "User\\Profile.aspx",
-              "ToolTip": "S:\\Project\\TeamSync\\User\\Profile.aspx",
-              "RelativeToolTip": "User\\Profile.aspx",
+              "DocumentIndex": 5,
+              "Title": "MasterPage.Master.cs",
+              "DocumentMoniker": "S:\\Project\\TeamSync\\MasterPage.Master.cs",
+              "RelativeDocumentMoniker": "MasterPage.Master.cs",
+              "ToolTip": "S:\\Project\\TeamSync\\MasterPage.Master.cs",
+              "RelativeToolTip": "MasterPage.Master.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T17:46:12.027Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserMaster.master",
+              "DocumentMoniker": "S:\\Project\\TeamSync\\UserMaster.master",
+              "RelativeDocumentMoniker": "UserMaster.master",
+              "ToolTip": "S:\\Project\\TeamSync\\UserMaster.master",
+              "RelativeToolTip": "UserMaster.master",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-05-13T17:54:41.663Z",
+              "WhenOpened": "2026-05-15T17:46:18.562Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserMaster.master.cs",
+              "DocumentMoniker": "S:\\Project\\TeamSync\\UserMaster.master.cs",
+              "RelativeDocumentMoniker": "UserMaster.master.cs",
+              "ToolTip": "S:\\Project\\TeamSync\\UserMaster.master.cs",
+              "RelativeToolTip": "UserMaster.master.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowCIAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T17:46:24.372Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Dashboard.aspx.cs",
-              "DocumentMoniker": "S:\\Project\\TeamSync\\Admin\\Dashboard.aspx.cs",
-              "RelativeDocumentMoniker": "Admin\\Dashboard.aspx.cs",
-              "ToolTip": "S:\\Project\\TeamSync\\Admin\\Dashboard.aspx.cs",
-              "RelativeToolTip": "Admin\\Dashboard.aspx.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAiwDoAAABGAAAAAAAAAA==",
+              "Title": "MyProfile.aspx.cs",
+              "DocumentMoniker": "S:\\Project\\TeamSync\\User\\MyProfile.aspx.cs",
+              "RelativeDocumentMoniker": "User\\MyProfile.aspx.cs",
+              "ToolTip": "S:\\Project\\TeamSync\\User\\MyProfile.aspx.cs",
+              "RelativeToolTip": "User\\MyProfile.aspx.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAQwGEAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T17:48:38.297Z",
+              "WhenOpened": "2026-05-15T18:10:53.463Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Dashboard.aspx",
-              "DocumentMoniker": "S:\\Project\\TeamSync\\Admin\\Dashboard.aspx",
-              "RelativeDocumentMoniker": "Admin\\Dashboard.aspx",
-              "ToolTip": "S:\\Project\\TeamSync\\Admin\\Dashboard.aspx",
-              "RelativeToolTip": "Admin\\Dashboard.aspx",
+              "Title": "Login.aspx",
+              "DocumentMoniker": "S:\\Project\\TeamSync\\Login.aspx",
+              "RelativeDocumentMoniker": "Login.aspx",
+              "ToolTip": "S:\\Project\\TeamSync\\Login.aspx",
+              "RelativeToolTip": "Login.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-05-13T17:48:27.011Z",
+              "WhenOpened": "2026-05-15T18:33:24.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MyProfile.aspx",
+              "DocumentMoniker": "S:\\Project\\TeamSync\\User\\MyProfile.aspx",
+              "RelativeDocumentMoniker": "User\\MyProfile.aspx",
+              "ToolTip": "S:\\Project\\TeamSync\\User\\MyProfile.aspx",
+              "RelativeToolTip": "User\\MyProfile.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-05-15T17:53:40.686Z",
               "EditorCaption": ""
             }
           ]

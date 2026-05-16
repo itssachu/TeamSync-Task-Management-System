@@ -2,22 +2,22 @@
 <!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>S:\Project\TeamSyncPublish</_PublishTargetUrl>
-    <History>True|2026-05-13T17:56:21.2665388Z||;</History>
+    <_PublishTargetUrl>S:\Project\Publish</_PublishTargetUrl>
+    <History>True|2026-05-15T18:34:27.2006201Z||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="Admin/Dashboard.aspx">
-      <publishTime>05/13/2026 23:24:12</publishTime>
+      <publishTime>05/15/2026 00:45:57</publishTime>
     </File>
     <File Include="Admin/Projects.aspx">
-      <publishTime>05/13/2026 22:48:05</publishTime>
+      <publishTime>05/15/2026 00:47:30</publishTime>
     </File>
     <File Include="Admin/Tasks.aspx">
-      <publishTime>05/13/2026 22:50:04</publishTime>
+      <publishTime>05/15/2026 00:48:41</publishTime>
     </File>
     <File Include="Admin/Users.aspx">
-      <publishTime>05/13/2026 22:18:26</publishTime>
+      <publishTime>05/15/2026 00:48:39</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>09/10/2013 16:29:20</publishTime>
@@ -197,10 +197,10 @@
       <publishTime>02/11/2014 15:26:04</publishTime>
     </File>
     <File Include="bin/TeamSync.dll">
-      <publishTime>05/13/2026 23:26:20</publishTime>
+      <publishTime>05/16/2026 00:04:26</publishTime>
     </File>
     <File Include="bin/TeamSync.pdb">
-      <publishTime>05/13/2026 23:26:20</publishTime>
+      <publishTime>05/16/2026 00:04:26</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
@@ -313,20 +313,23 @@
     <File Include="favicon.ico">
       <publishTime>05/12/2026 22:16:14</publishTime>
     </File>
+    <File Include="HomePage.aspx">
+      <publishTime>05/16/2026 00:01:55</publishTime>
+    </File>
     <File Include="JS/script.js">
       <publishTime>05/12/2026 22:36:22</publishTime>
     </File>
     <File Include="Login.aspx">
-      <publishTime>05/12/2026 23:16:37</publishTime>
+      <publishTime>05/16/2026 00:03:36</publishTime>
     </File>
     <File Include="Logout.aspx">
       <publishTime>05/12/2026 22:43:29</publishTime>
     </File>
     <File Include="MasterPage.Master">
-      <publishTime>05/13/2026 23:18:02</publishTime>
+      <publishTime>05/15/2026 23:23:05</publishTime>
     </File>
     <File Include="Register.aspx">
-      <publishTime>05/12/2026 22:42:29</publishTime>
+      <publishTime>05/15/2026 00:49:32</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>05/12/2026 22:16:21</publishTime>
@@ -448,14 +451,35 @@
     <File Include="Scripts/WebForms/WebUIValidation.js">
       <publishTime>05/12/2026 22:16:22</publishTime>
     </File>
+    <File Include="User/Calendar.aspx">
+      <publishTime>05/15/2026 01:20:20</publishTime>
+    </File>
+    <File Include="User/Dashboard.aspx">
+      <publishTime>05/15/2026 01:40:40</publishTime>
+    </File>
+    <File Include="User/MyProfile.aspx">
+      <publishTime>05/15/2026 23:56:36</publishTime>
+    </File>
+    <File Include="User/MyTasks.aspx">
+      <publishTime>05/15/2026 01:18:21</publishTime>
+    </File>
+    <File Include="User/Notifications.aspx">
+      <publishTime>05/15/2026 01:21:22</publishTime>
+    </File>
     <File Include="User/Profile.aspx">
-      <publishTime>05/13/2026 23:24:49</publishTime>
+      <publishTime>05/15/2026 23:34:12</publishTime>
+    </File>
+    <File Include="User/Projects.aspx">
+      <publishTime>05/15/2026 01:18:44</publishTime>
+    </File>
+    <File Include="UserMaster.master">
+      <publishTime>05/15/2026 23:39:48</publishTime>
     </File>
     <File Include="ViewSwitcher.ascx">
       <publishTime>05/12/2026 22:16:23</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/13/2026 22:23:56</publishTime>
+      <publishTime>05/16/2026 00:03:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

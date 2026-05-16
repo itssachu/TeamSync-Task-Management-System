@@ -1,72 +1,94 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master"
+﻿<%@ Page Title="Tasks" Language="C#" MasterPageFile="~/MasterPage.Master"
     AutoEventWireup="true"
-    CodeFile="Tasks.aspx.cs"
+    CodeBehind="Tasks.aspx.cs"
     Inherits="TeamSync.Admin.Tasks" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <style>
         body {
-            background: #f4f7fc;
+            background: #f5f7fb;
             font-family: 'Segoe UI', sans-serif;
         }
 
-        .task-container {
-            padding: 30px;
+        .task-wrapper {
+            padding: 25px;
         }
 
         .page-title {
             font-size: 32px;
             font-weight: 700;
-            margin-bottom: 25px;
-            color: #1e293b;
+            color: #0f172a;
         }
 
-        .card-box {
+        .page-subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .custom-card {
             background: white;
             border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #334155;
         }
 
         .form-control {
             height: 50px;
             border-radius: 12px;
             border: 1px solid #dbeafe;
-            box-shadow: none;
+            box-shadow: none !important;
         }
 
         textarea.form-control {
-            height: 120px;
+            height: 120px !important;
             resize: none;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg,#2563eb,#4f46e5);
-            border: none;
-            height: 50px;
-            border-radius: 12px;
-            font-weight: 600;
+        .btn-create {
             width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg,#2563eb,#4f46e5);
+            color: white;
+            font-weight: 600;
+            transition: .3s;
         }
 
-        .btn-primary:hover {
-            opacity: 0.9;
+        .btn-create:hover {
+            transform: translateY(-2px);
+            opacity: .95;
         }
 
         .table th {
             background: #2563eb;
             color: white;
             border: none;
+            padding: 15px;
         }
 
         .table td {
+            padding: 14px;
             vertical-align: middle;
         }
 
         .status-badge {
-            padding: 8px 15px;
+            padding: 7px 14px;
             border-radius: 30px;
             color: white;
             font-size: 12px;
@@ -77,7 +99,7 @@
             background: #f59e0b;
         }
 
-        .progress {
+        .progress-status {
             background: #3b82f6;
         }
 
@@ -86,6 +108,10 @@
         }
 
         @media(max-width:768px) {
+
+            .task-wrapper {
+                padding: 15px;
+            }
 
             .page-title {
                 font-size: 24px;
@@ -97,52 +123,70 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="container-fluid task-container">
+    <div class="container-fluid task-wrapper">
+
+        <!-- PAGE HEADER -->
 
         <div class="page-title">
             Task Management
         </div>
 
+        <div class="page-subtitle">
+            Manage project tasks and assign work to team members
+        </div>
+
         <div class="row">
 
-            <!-- Add Task -->
+            <!-- CREATE TASK -->
+
             <div class="col-lg-4">
 
-                <div class="card-box">
+                <div class="custom-card">
 
-                    <h4 class="mb-4">Create New Task</h4>
+                    <div class="section-title">
+                        Create New Task
+                    </div>
 
-                    <!-- Task Name -->
+                    <!-- TASK TITLE -->
+
                     <div class="mb-3">
 
-                        <label>Task Name</label>
+                        <label class="form-label">
+                            Task Title
+                        </label>
 
                         <asp:TextBox ID="txtTaskName"
                             runat="server"
                             CssClass="form-control"
-                            placeholder="Enter task name">
+                            placeholder="Enter task title">
                         </asp:TextBox>
 
                     </div>
 
-                    <!-- Description -->
+                    <!-- DESCRIPTION -->
+
                     <div class="mb-3">
 
-                        <label>Description</label>
+                        <label class="form-label">
+                            Description
+                        </label>
 
                         <asp:TextBox ID="txtDescription"
                             runat="server"
                             CssClass="form-control"
                             TextMode="MultiLine"
-                            placeholder="Enter task description">
+                            placeholder="Enter task details">
                         </asp:TextBox>
 
                     </div>
 
-                    <!-- Project -->
+                    <!-- PROJECT -->
+
                     <div class="mb-3">
 
-                        <label>Select Project</label>
+                        <label class="form-label">
+                            Select Project
+                        </label>
 
                         <asp:DropDownList ID="ddlProject"
                             runat="server"
@@ -151,10 +195,13 @@
 
                     </div>
 
-                    <!-- Assigned User -->
+                    <!-- ASSIGNED USER -->
+
                     <div class="mb-3">
 
-                        <label>Assign To</label>
+                        <label class="form-label">
+                            Assign To
+                        </label>
 
                         <asp:DropDownList ID="ddlUser"
                             runat="server"
@@ -163,10 +210,35 @@
 
                     </div>
 
-                    <!-- Status -->
+                    <!-- PRIORITY -->
+
                     <div class="mb-3">
 
-                        <label>Status</label>
+                        <label class="form-label">
+                            Priority
+                        </label>
+
+                        <asp:DropDownList ID="ddlPriority"
+                            runat="server"
+                            CssClass="form-control">
+
+                            <asp:ListItem Text="Low" Value="Low"></asp:ListItem>
+
+                            <asp:ListItem Text="Medium" Value="Medium" Selected="True"></asp:ListItem>
+
+                            <asp:ListItem Text="High" Value="High"></asp:ListItem>
+
+                        </asp:DropDownList>
+
+                    </div>
+
+                    <!-- STATUS -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Status
+                        </label>
 
                         <asp:DropDownList ID="ddlStatus"
                             runat="server"
@@ -182,10 +254,29 @@
 
                     </div>
 
-                    <!-- Due Date -->
+                    <!-- START DATE -->
+
                     <div class="mb-3">
 
-                        <label>Due Date</label>
+                        <label class="form-label">
+                            Start Date
+                        </label>
+
+                        <asp:TextBox ID="txtStartDate"
+                            runat="server"
+                            CssClass="form-control"
+                            TextMode="Date">
+                        </asp:TextBox>
+
+                    </div>
+
+                    <!-- DUE DATE -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Due Date
+                        </label>
 
                         <asp:TextBox ID="txtDueDate"
                             runat="server"
@@ -195,18 +286,15 @@
 
                     </div>
 
-                    <!-- Button -->
-                    <div class="mb-3">
+                    <!-- BUTTON -->
 
-                        <asp:Button ID="btnAddTask"
-                            runat="server"
-                            Text="Create Task"
-                            CssClass="btn btn-primary"
-                            OnClick="btnAddTask_Click" />
+                    <asp:Button ID="btnAddTask"
+                        runat="server"
+                        Text="Create Task"
+                        CssClass="btn-create"
+                        OnClick="btnAddTask_Click" />
 
-                    </div>
-
-                    <div class="text-center">
+                    <div class="text-center mt-3">
 
                         <asp:Label ID="lblMessage"
                             runat="server">
@@ -218,34 +306,51 @@
 
             </div>
 
-            <!-- Task List -->
+            <!-- TASK LIST -->
+
             <div class="col-lg-8">
 
-                <div class="card-box">
+                <div class="custom-card">
 
-                    <h4 class="mb-4">All Tasks</h4>
+                    <div class="section-title">
+                        All Tasks
+                    </div>
 
                     <div class="table-responsive">
 
                         <asp:GridView ID="gvTasks"
                             runat="server"
                             AutoGenerateColumns="False"
-                            CssClass="table table-hover table-bordered"
+                            CssClass="table table-hover"
                             GridLines="None">
 
                             <Columns>
 
                                 <asp:BoundField DataField="TaskTitle"
-                                    HeaderText="Task Name" />
+                                    HeaderText="Task" />
 
                                 <asp:BoundField DataField="ProjectName"
                                     HeaderText="Project" />
 
-                                <asp:BoundField DataField="FullName"
+                                <asp:BoundField DataField="AssignedToName"
                                     HeaderText="Assigned To" />
 
-                                <asp:BoundField DataField="Status"
-                                    HeaderText="Status" />
+                                <asp:BoundField DataField="Priority"
+                                    HeaderText="Priority" />
+
+                                <asp:TemplateField HeaderText="Status">
+
+                                    <ItemTemplate>
+
+                                        <span class='status-badge <%# GetStatusClass(Eval("Status").ToString()) %>'>
+
+                                            <%# Eval("Status") %>
+
+                                        </span>
+
+                                    </ItemTemplate>
+
+                                </asp:TemplateField>
 
                                 <asp:BoundField DataField="DueDate"
                                     HeaderText="Due Date"

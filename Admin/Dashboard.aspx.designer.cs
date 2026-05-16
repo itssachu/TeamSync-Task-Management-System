@@ -13,6 +13,42 @@ public partial class Admin_Dashboard
 {
 
     /// <summary>
+    /// lblPending control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblPending;
+
+    /// <summary>
+    /// lblInProgress control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblInProgress;
+
+    /// <summary>
+    /// lblCompletedHidden control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblCompletedHidden;
+
+    /// <summary>
+    /// lblOverdueHidden control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblOverdueHidden;
+
+    /// <summary>
     /// lblProjects control.
     /// </summary>
     /// <remarks>

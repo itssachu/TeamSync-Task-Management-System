@@ -51,6 +51,15 @@ namespace TeamSync.Admin
         protected global::System.Web.UI.WebControls.DropDownList ddlUser;
 
         /// <summary>
+        /// ddlPriority control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPriority;
+
+        /// <summary>
         /// ddlStatus control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace TeamSync.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
+
+        /// <summary>
+        /// txtStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStartDate;
 
         /// <summary>
         /// txtDueDate control.

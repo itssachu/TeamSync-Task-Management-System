@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using TeamSync;
 using TeamSync.Helpers;
 
 namespace TeamSync.Admin
@@ -10,7 +9,6 @@ namespace TeamSync.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Session Check
             if (Session["UserId"] == null)
             {
                 Response.Redirect("~/Login.aspx");
@@ -27,14 +25,17 @@ namespace TeamSync.Admin
         }
 
         // =====================================================
-        // LOAD PROJECTS DROPDOWN
+        // LOAD PROJECTS
         // =====================================================
 
         private void LoadProjects()
         {
             try
             {
-                string query = "SELECT * FROM Projects ORDER BY ProjectName ASC";
+                string query = @"
+                    SELECT *
+                    FROM Projects
+                    ORDER BY ProjectName ASC";
 
                 DataTable dt = DatabaseHelper.GetDataTable(query);
 
@@ -46,25 +47,30 @@ namespace TeamSync.Admin
 
                 ddlProject.DataBind();
 
-                ddlProject.Items.Insert(0, "Select Project");
+                ddlProject.Items.Insert(0,
+                    new System.Web.UI.WebControls.ListItem("Select Project", ""));
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-
                 lblMessage.Text = ex.Message;
+
+                lblMessage.ForeColor = System.Drawing.Color.Red;
             }
         }
 
         // =====================================================
-        // LOAD USERS DROPDOWN
+        // LOAD USERS
         // =====================================================
 
         private void LoadUsers()
         {
             try
             {
-                string query = "SELECT * FROM Users ORDER BY FullName ASC";
+                string query = @"
+                    SELECT *
+                    FROM Users
+                    WHERE IsActive = 1
+                    ORDER BY FullName ASC";
 
                 DataTable dt = DatabaseHelper.GetDataTable(query);
 
@@ -76,13 +82,14 @@ namespace TeamSync.Admin
 
                 ddlUser.DataBind();
 
-                ddlUser.Items.Insert(0, "Select User");
+                ddlUser.Items.Insert(0,
+                    new System.Web.UI.WebControls.ListItem("Select User", ""));
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-
                 lblMessage.Text = ex.Message;
+
+                lblMessage.ForeColor = System.Drawing.Color.Red;
             }
         }
 
@@ -95,20 +102,23 @@ namespace TeamSync.Admin
             try
             {
                 string query = @"
-                    SELECT 
+                    SELECT
                         T.TaskID,
                         T.TaskTitle,
-                        P.ProjectName,
-                        U.FullName,
+                        T.Priority,
                         T.Status,
-                        T.DueDate
+                        T.DueDate,
+
+                        P.ProjectName,
+
+                        U.FullName AS AssignedToName
 
                     FROM Tasks T
 
                     INNER JOIN Projects P
-                    ON T.ProjectId = P.ProjectID
+                    ON T.ProjectID = P.ProjectID
 
-                    INNER JOIN Users U
+                    LEFT JOIN Users U
                     ON T.AssignedTo = U.UserID
 
                     ORDER BY T.TaskID DESC";
@@ -121,133 +131,191 @@ namespace TeamSync.Admin
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-
                 lblMessage.Text = ex.Message;
+
+                lblMessage.ForeColor = System.Drawing.Color.Red;
             }
         }
 
         // =====================================================
-        // ADD TASK
+        // CREATE TASK
         // =====================================================
 
         protected void btnAddTask_Click(object sender, EventArgs e)
         {
             try
             {
-                string taskName = txtTaskName.Text.Trim();
+                string taskTitle = txtTaskName.Text.Trim();
 
                 string description = txtDescription.Text.Trim();
 
-                string projectId = ddlProject.SelectedValue;
+                string projectID = ddlProject.SelectedValue;
 
                 string assignedTo = ddlUser.SelectedValue;
 
+                string priority = ddlPriority.SelectedValue;
+
                 string status = ddlStatus.SelectedValue;
+
+                string startDate = txtStartDate.Text;
 
                 string dueDate = txtDueDate.Text;
 
-                // Validation
-                if (taskName == "")
-                {
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                int assignedBy = Convert.ToInt32(Session["UserId"]);
 
-                    lblMessage.Text = "Task name is required";
+                // VALIDATION
+
+                if (taskTitle == "")
+                {
+                    lblMessage.Text = "Task title is required";
+
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
 
                     return;
                 }
 
-                if (projectId == "Select Project")
+                if (projectID == "")
                 {
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    lblMessage.Text = "Please select project";
 
-                    lblMessage.Text = "Please select a project";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
 
                     return;
                 }
 
-                if (assignedTo == "Select User")
+                if (assignedTo == "")
                 {
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    lblMessage.Text = "Please select user";
 
-                    lblMessage.Text = "Please select a user";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
 
                     return;
                 }
 
-                // Insert Query
+                // INSERT TASK
+
                 string query = @"
                     INSERT INTO Tasks
                     (
+                        ProjectID,
                         TaskTitle,
                         TaskDescription,
-                        ProjectId,
                         AssignedTo,
+                        AssignedBy,
+                        Priority,
                         Status,
+                        StartDate,
                         DueDate,
                         CreatedAt
                     )
 
                     VALUES
                     (
+                        @ProjectID,
                         @TaskTitle,
                         @TaskDescription,
-                        @ProjectId,
                         @AssignedTo,
+                        @AssignedBy,
+                        @Priority,
                         @Status,
+                        @StartDate,
                         @DueDate,
                         GETDATE()
                     )";
 
                 SqlParameter[] param =
                 {
-                    new SqlParameter("@TaskTitle", taskName),
+                    new SqlParameter("@ProjectID", projectID),
+
+                    new SqlParameter("@TaskTitle", taskTitle),
 
                     new SqlParameter("@TaskDescription", description),
 
-                    new SqlParameter("@ProjectId", projectId),
-
                     new SqlParameter("@AssignedTo", assignedTo),
+
+                    new SqlParameter("@AssignedBy", assignedBy),
+
+                    new SqlParameter("@Priority", priority),
 
                     new SqlParameter("@Status", status),
 
-                    new SqlParameter("@DueDate", dueDate)
+                    new SqlParameter("@StartDate",
+                        string.IsNullOrEmpty(startDate)
+                        ? (object)DBNull.Value
+                        : Convert.ToDateTime(startDate)),
+
+                    new SqlParameter("@DueDate",
+                        string.IsNullOrEmpty(dueDate)
+                        ? (object)DBNull.Value
+                        : Convert.ToDateTime(dueDate))
                 };
 
                 int result = DatabaseHelper.ExecuteQuery(query, param);
 
                 if (result > 0)
                 {
-                    lblMessage.ForeColor = System.Drawing.Color.Green;
-
                     lblMessage.Text = "Task created successfully";
 
-                    txtTaskName.Text = "";
+                    lblMessage.ForeColor = System.Drawing.Color.Green;
 
-                    txtDescription.Text = "";
-
-                    txtDueDate.Text = "";
-
-                    ddlProject.SelectedIndex = 0;
-
-                    ddlUser.SelectedIndex = 0;
-
-                    ddlStatus.SelectedIndex = 0;
+                    ClearFields();
 
                     LoadTasks();
                 }
                 else
                 {
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
-
                     lblMessage.Text = "Failed to create task";
+
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
                 }
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-
                 lblMessage.Text = ex.Message;
+
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        // =====================================================
+        // CLEAR FIELDS
+        // =====================================================
+
+        private void ClearFields()
+        {
+            txtTaskName.Text = "";
+
+            txtDescription.Text = "";
+
+            txtStartDate.Text = "";
+
+            txtDueDate.Text = "";
+
+            ddlProject.SelectedIndex = 0;
+
+            ddlUser.SelectedIndex = 0;
+
+            ddlPriority.SelectedIndex = 1;
+
+            ddlStatus.SelectedIndex = 0;
+        }
+
+        // =====================================================
+        // STATUS CLASS
+        // =====================================================
+
+        protected string GetStatusClass(string status)
+        {
+            switch (status)
+            {
+                case "Completed":
+                    return "completed";
+
+                case "In Progress":
+                    return "progress-status";
+
+                default:
+                    return "pending";
             }
         }
     }

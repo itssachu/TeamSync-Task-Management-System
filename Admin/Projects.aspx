@@ -1,61 +1,85 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master"
+﻿<%@ Page Title="Projects" Language="C#" MasterPageFile="~/MasterPage.Master"
     AutoEventWireup="true"
-    CodeFile="Projects.aspx.cs"
+    CodeBehind="Projects.aspx.cs"
     Inherits="TeamSync.Admin.Projects" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <style>
         body {
-            background: #f4f7fc;
+            background: #f5f7fb;
             font-family: 'Segoe UI', sans-serif;
         }
 
-        .project-container {
-            padding: 30px;
+        .project-wrapper {
+            padding: 25px;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
         }
 
         .page-title {
             font-size: 32px;
             font-weight: 700;
-            margin-bottom: 25px;
             color: #1e293b;
         }
 
-        .card-box {
-            background: white;
+        .page-subtitle {
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        .custom-card {
+            background: #fff;
             border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #334155;
         }
 
         .form-control {
             height: 50px;
             border-radius: 12px;
             border: 1px solid #dbeafe;
-            box-shadow: none;
+            box-shadow: none !important;
         }
 
         textarea.form-control {
-            height: 120px;
+            height: 120px !important;
             resize: none;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg,#2563eb,#4f46e5);
-            border: none;
-            height: 50px;
-            border-radius: 12px;
-            font-weight: 600;
+        .btn-create {
             width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg,#2563eb,#4f46e5);
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        .btn-primary:hover {
-            opacity: 0.9;
+        .btn-create:hover {
+            transform: translateY(-2px);
+            opacity: .95;
         }
 
-        .gridview-style {
+        .table {
             border-radius: 15px;
             overflow: hidden;
         }
@@ -64,29 +88,45 @@
             background: #2563eb;
             color: white;
             border: none;
+            padding: 15px;
         }
 
         .table td {
             vertical-align: middle;
+            padding: 14px;
         }
 
-        .badge-status {
-            padding: 8px 14px;
+        .status-badge {
+            padding: 8px 16px;
             border-radius: 30px;
             color: white;
             font-size: 12px;
             font-weight: 600;
         }
 
-        .active-status {
+        .status-active {
             background: #10b981;
         }
 
-        .completed-status {
+        .status-completed {
             background: #6366f1;
         }
 
+        .status-pending {
+            background: #f59e0b;
+        }
+
+        .empty-box {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+        }
+
         @media(max-width:768px) {
+
+            .project-wrapper {
+                padding: 15px;
+            }
 
             .page-title {
                 font-size: 24px;
@@ -98,24 +138,39 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="container-fluid project-container">
+    <div class="container-fluid project-wrapper">
 
-        <div class="page-title">
-            Project Management
+        <!-- HEADER -->
+
+        <div class="page-header">
+
+            <div class="page-title">
+                Project Management
+            </div>
+
+            <div class="page-subtitle">
+                Create and manage all projects from one place
+            </div>
+
         </div>
 
         <div class="row">
 
-            <!-- Add Project -->
+            <!-- CREATE PROJECT -->
+
             <div class="col-lg-4">
 
-                <div class="card-box">
+                <div class="custom-card">
 
-                    <h4 class="mb-4">Create New Project</h4>
+                    <div class="section-title">
+                        Create New Project
+                    </div>
 
                     <div class="mb-3">
 
-                        <label>Project Name</label>
+                        <label class="form-label">
+                            Project Name
+                        </label>
 
                         <asp:TextBox ID="txtProjectName"
                             runat="server"
@@ -127,26 +182,32 @@
 
                     <div class="mb-3">
 
-                        <label>Description</label>
+                        <label class="form-label">
+                            Description
+                        </label>
 
                         <asp:TextBox ID="txtDescription"
                             runat="server"
-                            CssClass="form-control"
                             TextMode="MultiLine"
-                            placeholder="Enter project description">
+                            CssClass="form-control"
+                            placeholder="Write project details">
                         </asp:TextBox>
 
                     </div>
 
                     <div class="mb-3">
 
-                        <label>Status</label>
+                        <label class="form-label">
+                            Status
+                        </label>
 
                         <asp:DropDownList ID="ddlStatus"
                             runat="server"
                             CssClass="form-control">
 
                             <asp:ListItem Text="Active" Value="Active"></asp:ListItem>
+
+                            <asp:ListItem Text="Pending" Value="Pending"></asp:ListItem>
 
                             <asp:ListItem Text="Completed" Value="Completed"></asp:ListItem>
 
@@ -156,19 +217,42 @@
 
                     <div class="mb-3">
 
-                        <asp:Button ID="btnAddProject"
+                        <label class="form-label">
+                            Start Date
+                        </label>
+
+                        <asp:TextBox ID="txtStartDate"
                             runat="server"
-                            Text="Create Project"
-                            CssClass="btn btn-primary"
-                            OnClick="btnAddProject_Click" />
+                            TextMode="Date"
+                            CssClass="form-control">
+                        </asp:TextBox>
 
                     </div>
 
-                    <div class="text-center">
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            End Date
+                        </label>
+
+                        <asp:TextBox ID="txtEndDate"
+                            runat="server"
+                            TextMode="Date"
+                            CssClass="form-control">
+                        </asp:TextBox>
+
+                    </div>
+
+                    <asp:Button ID="btnAddProject"
+                        runat="server"
+                        Text="Create Project"
+                        CssClass="btn-create"
+                        OnClick="btnAddProject_Click" />
+
+                    <div class="mt-3 text-center">
 
                         <asp:Label ID="lblMessage"
-                            runat="server"
-                            ForeColor="Green">
+                            runat="server">
                         </asp:Label>
 
                     </div>
@@ -177,34 +261,60 @@
 
             </div>
 
-            <!-- Project List -->
+            <!-- PROJECT LIST -->
+
             <div class="col-lg-8">
 
-                <div class="card-box">
+                <div class="custom-card">
 
-                    <h4 class="mb-4">All Projects</h4>
+                    <div class="section-title">
+                        All Projects
+                    </div>
 
-                    <div class="table-responsive gridview-style">
+                    <div class="table-responsive">
 
                         <asp:GridView ID="gvProjects"
                             runat="server"
                             AutoGenerateColumns="False"
-                            CssClass="table table-hover table-bordered"
-                            GridLines="None">
+                            CssClass="table table-hover"
+                            GridLines="None"
+                            EmptyDataText="No projects found">
 
                             <Columns>
 
                                 <asp:BoundField DataField="ProjectName"
-                                    HeaderText="Project Name" />
+                                    HeaderText="Project" />
 
                                 <asp:BoundField DataField="Description"
                                     HeaderText="Description" />
 
-                                <asp:BoundField DataField="Status"
-                                    HeaderText="Status" />
+                                <asp:BoundField DataField="StartDate"
+                                    HeaderText="Start"
+                                    DataFormatString="{0:dd MMM yyyy}" />
+
+                                <asp:BoundField DataField="EndDate"
+                                    HeaderText="End"
+                                    DataFormatString="{0:dd MMM yyyy}" />
+
+                                <asp:TemplateField HeaderText="Status">
+
+                                    <ItemTemplate>
+
+                                        <span class='status-badge <%# GetStatusClass(Eval("Status").ToString()) %>'>
+
+                                            <%# Eval("Status") %>
+
+                                        </span>
+
+                                    </ItemTemplate>
+
+                                </asp:TemplateField>
+
+                                <asp:BoundField DataField="CreatedByName"
+                                    HeaderText="Created By" />
 
                                 <asp:BoundField DataField="CreatedAt"
-                                    HeaderText="Created Date"
+                                    HeaderText="Created On"
                                     DataFormatString="{0:dd MMM yyyy}" />
 
                             </Columns>

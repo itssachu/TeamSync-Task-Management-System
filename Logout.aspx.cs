@@ -18,7 +18,7 @@ namespace TeamSync
             Session.Abandon();
 
             // Redirect to login page
-            Response.Redirect("Login.aspx");
+            Response.Redirect("HomePage.aspx");
         }
     }
 }

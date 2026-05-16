@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using TeamSync;
 using TeamSync.Helpers;
 
 namespace TeamSync.Admin
@@ -11,6 +10,7 @@ namespace TeamSync.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             // Session Check
+
             if (Session["UserId"] == null)
             {
                 Response.Redirect("~/Login.aspx");
@@ -22,15 +22,31 @@ namespace TeamSync.Admin
             }
         }
 
-        // =====================================================
-        // LOAD ALL PROJECTS
-        // =====================================================
+        // =========================================================
+        // LOAD PROJECTS
+        // =========================================================
 
         private void LoadProjects()
         {
             try
             {
-                string query = "SELECT * FROM Projects ORDER BY ProjectID DESC";
+                string query = @"
+                    SELECT
+                        P.ProjectID,
+                        P.ProjectName,
+                        P.Description,
+                        P.StartDate,
+                        P.EndDate,
+                        P.Status,
+                        P.CreatedAt,
+                        U.FullName AS CreatedByName
+
+                    FROM Projects P
+
+                    INNER JOIN Users U
+                    ON P.CreatedBy = U.UserID
+
+                    ORDER BY P.ProjectID DESC";
 
                 DataTable dt = DatabaseHelper.GetDataTable(query);
 
@@ -46,9 +62,9 @@ namespace TeamSync.Admin
             }
         }
 
-        // =====================================================
+        // =========================================================
         // ADD PROJECT
-        // =====================================================
+        // =========================================================
 
         protected void btnAddProject_Click(object sender, EventArgs e)
         {
@@ -60,9 +76,14 @@ namespace TeamSync.Admin
 
                 string status = ddlStatus.SelectedValue;
 
-                string CreatedBy = Session["UserId"].ToString();
+                string startDate = txtStartDate.Text;
+
+                string endDate = txtEndDate.Text;
+
+                int createdBy = Convert.ToInt32(Session["UserId"]);
 
                 // Validation
+
                 if (projectName == "")
                 {
                     lblMessage.ForeColor = System.Drawing.Color.Red;
@@ -73,9 +94,10 @@ namespace TeamSync.Admin
                 }
 
                 // Check Existing Project
+
                 string checkQuery = @"
-                    SELECT COUNT(*) 
-                    FROM Projects 
+                    SELECT COUNT(*)
+                    FROM Projects
                     WHERE ProjectName=@ProjectName";
 
                 SqlParameter[] checkParam =
@@ -96,24 +118,29 @@ namespace TeamSync.Admin
                     return;
                 }
 
-                // Insert Query
+                // Insert Project
+
                 string query = @"
                     INSERT INTO Projects
                     (
                         ProjectName,
                         Description,
+                        StartDate,
+                        EndDate,
                         Status,
-                        CreatedAt,
-                        CreatedBy
+                        CreatedBy,
+                        CreatedAt
                     )
 
                     VALUES
                     (
                         @ProjectName,
                         @Description,
+                        @StartDate,
+                        @EndDate,
                         @Status,
-                        GETDATE(),
-                        @CreatedBy
+                        @CreatedBy,
+                        GETDATE()
                     )";
 
                 SqlParameter[] param =
@@ -122,8 +149,19 @@ namespace TeamSync.Admin
 
                     new SqlParameter("@Description", description),
 
+                    new SqlParameter("@StartDate",
+                        string.IsNullOrEmpty(startDate)
+                        ? (object)DBNull.Value
+                        : Convert.ToDateTime(startDate)),
+
+                    new SqlParameter("@EndDate",
+                        string.IsNullOrEmpty(endDate)
+                        ? (object)DBNull.Value
+                        : Convert.ToDateTime(endDate)),
+
                     new SqlParameter("@Status", status),
-                    new SqlParameter("@CreatedBy", CreatedBy)
+
+                    new SqlParameter("@CreatedBy", createdBy)
                 };
 
                 int result = DatabaseHelper.ExecuteQuery(query, param);
@@ -134,11 +172,7 @@ namespace TeamSync.Admin
 
                     lblMessage.Text = "Project created successfully";
 
-                    txtProjectName.Text = "";
-
-                    txtDescription.Text = "";
-
-                    ddlStatus.SelectedIndex = 0;
+                    ClearFields();
 
                     LoadProjects();
                 }
@@ -154,6 +188,42 @@ namespace TeamSync.Admin
                 lblMessage.ForeColor = System.Drawing.Color.Red;
 
                 lblMessage.Text = ex.Message;
+            }
+        }
+
+        // =========================================================
+        // CLEAR FIELDS
+        // =========================================================
+
+        private void ClearFields()
+        {
+            txtProjectName.Text = "";
+
+            txtDescription.Text = "";
+
+            txtStartDate.Text = "";
+
+            txtEndDate.Text = "";
+
+            ddlStatus.SelectedIndex = 0;
+        }
+
+        // =========================================================
+        // STATUS BADGE CSS
+        // =========================================================
+
+        protected string GetStatusClass(string status)
+        {
+            switch (status)
+            {
+                case "Active":
+                    return "status-active";
+
+                case "Completed":
+                    return "status-completed";
+
+                default:
+                    return "status-pending";
             }
         }
     }

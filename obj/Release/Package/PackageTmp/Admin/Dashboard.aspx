@@ -1,14 +1,23 @@
-﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="~/MasterPage.master"
-AutoEventWireup="true"
-CodeFile="Dashboard.aspx.cs"
-Inherits="Admin_Dashboard" %>
+﻿<%@ Page Title="Dashboard"
+    Language="C#"
+    MasterPageFile="~/MasterPage.master"
+    AutoEventWireup="true"
+    CodeBehind="Dashboard.aspx.cs"
+    Inherits="Admin_Dashboard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
 
+        .dashboard-header {
+            margin-bottom: 35px;
+        }
+
         .dashboard-title {
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 700;
             color: #111827;
             margin-bottom: 8px;
@@ -16,81 +25,116 @@ Inherits="Admin_Dashboard" %>
 
         .dashboard-subtitle {
             color: #6b7280;
-            margin-bottom: 35px;
+            font-size: 15px;
         }
 
+        /* ===========================
+           STAT CARDS
+        ============================*/
+
         .stats-card {
-            border-radius: 24px;
-            padding: 30px;
-            color: white;
+            border-radius: 26px;
+            padding: 28px;
             position: relative;
             overflow: hidden;
-            transition: 0.3s;
-            height: 180px;
+            color: white;
+            height: 190px;
+            transition: 0.3s ease;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
         }
 
         .stats-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-8px);
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            top: -70px;
+            right: -70px;
         }
 
         .stats-icon {
-            width: 65px;
-            height: 65px;
+            width: 68px;
+            height: 68px;
             border-radius: 18px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.18);
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             font-size: 28px;
             margin-bottom: 25px;
         }
 
         .stats-number {
-            font-size: 38px;
+            font-size: 42px;
             font-weight: 700;
+            line-height: 1;
         }
 
         .stats-text {
-            font-size: 16px;
-            opacity: 0.9;
+            margin-top: 10px;
+            font-size: 15px;
+            opacity: 0.95;
         }
 
         .bg-projects {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            background: linear-gradient(135deg,#4f46e5,#7c3aed);
         }
 
         .bg-tasks {
-            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            background: linear-gradient(135deg,#0891b2,#2563eb);
         }
 
         .bg-completed {
-            background: linear-gradient(135deg, #10b981, #22c55e);
+            background: linear-gradient(135deg,#059669,#22c55e);
         }
 
         .bg-overdue {
-            background: linear-gradient(135deg, #ef4444, #f97316);
+            background: linear-gradient(135deg,#dc2626,#f97316);
         }
 
-        .section-card {
+        /* ===========================
+           SECTION CARD
+        ============================*/
+
+        .dashboard-card {
             background: white;
-            border-radius: 24px;
-            padding: 25px;
-            margin-top: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 26px;
+            padding: 28px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            height: 100%;
         }
 
-        .section-title {
+        .card-title-custom {
             font-size: 22px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #111827;
         }
+
+        /* ===========================
+           CHART
+        ============================*/
+
+        .chart-wrapper {
+            position: relative;
+            height: 360px;
+        }
+
+        /* ===========================
+           ACTIVITY
+        ============================*/
 
         .activity-item {
             display: flex;
             align-items: center;
             padding: 18px 0;
-            border-bottom: 1px solid #f3f4f6;
+            border-bottom: 1px solid #f1f5f9;
         }
 
         .activity-item:last-child {
@@ -98,64 +142,98 @@ Inherits="Admin_Dashboard" %>
         }
 
         .activity-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 15px;
+            width: 55px;
+            height: 55px;
+            border-radius: 18px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             color: white;
-            margin-right: 18px;
             font-size: 20px;
+            margin-right: 18px;
+            flex-shrink: 0;
         }
 
         .activity-content h6 {
             margin: 0;
             font-weight: 600;
             color: #111827;
+            font-size: 15px;
         }
 
         .activity-content p {
-            margin: 0;
+            margin: 4px 0 0;
             color: #6b7280;
             font-size: 14px;
         }
 
-        .chart-placeholder {
-            height: 320px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #f9fafb, #f3f4f6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: #6b7280;
-        }
+        /* ===========================
+           RESPONSIVE
+        ============================*/
 
-        .chart-placeholder i {
-            font-size: 60px;
-            margin-bottom: 15px;
-            color: #4f46e5;
+        @media(max-width:991px) {
+
+            .stats-card {
+                height: auto;
+            }
+
+            .chart-wrapper {
+                height: 300px;
+            }
+
         }
 
     </style>
 
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2"
+    ContentPlaceHolderID="MainContent"
+    runat="server">
 
-    <!-- Heading -->
-    <h2 class="dashboard-title">Dashboard Overview</h2>
+    <!-- HIDDEN LABELS -->
 
-    <p class="dashboard-subtitle">
-        Monitor your projects, tasks and team performance in real-time.
-    </p>
+    <asp:Label ID="lblPending"
+        runat="server"
+        ClientIDMode="Static"
+        Style="display:none;"></asp:Label>
 
-    <!-- Statistics -->
+    <asp:Label ID="lblInProgress"
+        runat="server"
+        ClientIDMode="Static"
+        Style="display:none;"></asp:Label>
+
+    <asp:Label ID="lblCompletedHidden"
+        runat="server"
+        ClientIDMode="Static"
+        Style="display:none;"></asp:Label>
+
+    <asp:Label ID="lblOverdueHidden"
+        runat="server"
+        ClientIDMode="Static"
+        Style="display:none;"></asp:Label>
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <h2 class="dashboard-title">
+            Dashboard Overview
+        </h2>
+
+        <p class="dashboard-subtitle">
+            Monitor projects, tasks, progress and team activities in real-time.
+        </p>
+
+    </div>
+
+    <!-- STATS -->
+
     <div class="row g-4">
 
-        <!-- Projects -->
-        <div class="col-lg-3 col-md-6">
+        <!-- PROJECTS -->
+
+        <div class="col-xl-3 col-md-6">
 
             <div class="stats-card bg-projects">
 
@@ -164,7 +242,9 @@ Inherits="Admin_Dashboard" %>
                 </div>
 
                 <div class="stats-number">
-                    <asp:Label ID="lblProjects" runat="server" Text="0"></asp:Label>
+                    <asp:Label ID="lblProjects"
+                        runat="server"
+                        Text="0"></asp:Label>
                 </div>
 
                 <div class="stats-text">
@@ -175,17 +255,20 @@ Inherits="Admin_Dashboard" %>
 
         </div>
 
-        <!-- Tasks -->
-        <div class="col-lg-3 col-md-6">
+        <!-- TASKS -->
+
+        <div class="col-xl-3 col-md-6">
 
             <div class="stats-card bg-tasks">
 
                 <div class="stats-icon">
-                    <i class="bi bi-list-check"></i>
+                    <i class="bi bi-list-task"></i>
                 </div>
 
                 <div class="stats-number">
-                    <asp:Label ID="lblTasks" runat="server" Text="0"></asp:Label>
+                    <asp:Label ID="lblTasks"
+                        runat="server"
+                        Text="0"></asp:Label>
                 </div>
 
                 <div class="stats-text">
@@ -196,8 +279,9 @@ Inherits="Admin_Dashboard" %>
 
         </div>
 
-        <!-- Completed -->
-        <div class="col-lg-3 col-md-6">
+        <!-- COMPLETED -->
+
+        <div class="col-xl-3 col-md-6">
 
             <div class="stats-card bg-completed">
 
@@ -206,7 +290,9 @@ Inherits="Admin_Dashboard" %>
                 </div>
 
                 <div class="stats-number">
-                    <asp:Label ID="lblCompleted" runat="server" Text="0"></asp:Label>
+                    <asp:Label ID="lblCompleted"
+                        runat="server"
+                        Text="0"></asp:Label>
                 </div>
 
                 <div class="stats-text">
@@ -217,17 +303,20 @@ Inherits="Admin_Dashboard" %>
 
         </div>
 
-        <!-- Overdue -->
-        <div class="col-lg-3 col-md-6">
+        <!-- OVERDUE -->
+
+        <div class="col-xl-3 col-md-6">
 
             <div class="stats-card bg-overdue">
 
                 <div class="stats-icon">
-                    <i class="bi bi-exclamation-circle-fill"></i>
+                    <i class="bi bi-exclamation-triangle-fill"></i>
                 </div>
 
                 <div class="stats-number">
-                    <asp:Label ID="lblOverdue" runat="server" Text="0"></asp:Label>
+                    <asp:Label ID="lblOverdue"
+                        runat="server"
+                        Text="0"></asp:Label>
                 </div>
 
                 <div class="stats-text">
@@ -240,27 +329,23 @@ Inherits="Admin_Dashboard" %>
 
     </div>
 
-    <!-- Charts & Activities -->
-    <div class="row">
+    <!-- CHART + ACTIVITIES -->
 
-        <!-- Chart -->
+    <div class="row mt-4 g-4">
+
+        <!-- CHART -->
+
         <div class="col-lg-8">
 
-            <div class="section-card">
+            <div class="dashboard-card">
 
-                <h4 class="section-title">
+                <h4 class="card-title-custom">
                     Task Analytics
                 </h4>
 
-                <div class="chart-placeholder">
+                <div class="chart-wrapper">
 
-                    <i class="bi bi-bar-chart-line-fill"></i>
-
-                    <h5>Analytics Chart</h5>
-
-                    <p>
-                        Integrate Chart.js or Google Charts here
-                    </p>
+                    <canvas id="taskChart"></canvas>
 
                 </div>
 
@@ -268,16 +353,16 @@ Inherits="Admin_Dashboard" %>
 
         </div>
 
-        <!-- Activities -->
+        <!-- ACTIVITIES -->
+
         <div class="col-lg-4">
 
-            <div class="section-card">
+            <div class="dashboard-card">
 
-                <h4 class="section-title">
+                <h4 class="card-title-custom">
                     Recent Activities
                 </h4>
 
-                <!-- Activity -->
                 <div class="activity-item">
 
                     <div class="activity-icon bg-primary">
@@ -285,13 +370,12 @@ Inherits="Admin_Dashboard" %>
                     </div>
 
                     <div class="activity-content">
-                        <h6>New Project Created</h6>
-                        <p>Website Redesign Project</p>
+                        <h6>Project Created</h6>
+                        <p>New development project added.</p>
                     </div>
 
                 </div>
 
-                <!-- Activity -->
                 <div class="activity-item">
 
                     <div class="activity-icon bg-success">
@@ -300,35 +384,33 @@ Inherits="Admin_Dashboard" %>
 
                     <div class="activity-content">
                         <h6>Task Completed</h6>
-                        <p>Homepage UI Completed</p>
+                        <p>One task has been marked completed.</p>
                     </div>
 
                 </div>
 
-                <!-- Activity -->
                 <div class="activity-item">
 
                     <div class="activity-icon bg-warning">
-                        <i class="bi bi-person-plus"></i>
-                    </div>
-
-                    <div class="activity-content">
-                        <h6>New Team Member</h6>
-                        <p>Rahul joined the team</p>
-                    </div>
-
-                </div>
-
-                <!-- Activity -->
-                <div class="activity-item">
-
-                    <div class="activity-icon bg-danger">
                         <i class="bi bi-clock-history"></i>
                     </div>
 
                     <div class="activity-content">
-                        <h6>Task Deadline</h6>
-                        <p>API Integration due today</p>
+                        <h6>Pending Tasks</h6>
+                        <p>Track all pending tasks efficiently.</p>
+                    </div>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <div class="activity-icon bg-danger">
+                        <i class="bi bi-exclamation-circle"></i>
+                    </div>
+
+                    <div class="activity-content">
+                        <h6>Overdue Tasks</h6>
+                        <p>Tasks requiring immediate attention.</p>
                     </div>
 
                 </div>
@@ -338,5 +420,102 @@ Inherits="Admin_Dashboard" %>
         </div>
 
     </div>
+
+    <!-- CHART SCRIPT -->
+
+    <script>
+
+        window.addEventListener('load', function () {
+
+            var completed =
+                parseInt(document.getElementById('lblCompletedHidden').textContent) || 0;
+
+            var pending =
+                parseInt(document.getElementById('lblPending').textContent) || 0;
+
+            var progress =
+                parseInt(document.getElementById('lblInProgress').textContent) || 0;
+
+            var overdue =
+                parseInt(document.getElementById('lblOverdueHidden').textContent) || 0;
+
+            var canvas = document.getElementById('taskChart');
+
+            if (!canvas)
+                return;
+
+            var ctx = canvas.getContext('2d');
+
+            new Chart(ctx, {
+
+                type: 'doughnut',
+
+                data: {
+
+                    labels: [
+                        'Completed',
+                        'Pending',
+                        'In Progress',
+                        'Overdue'
+                    ],
+
+                    datasets: [{
+
+                        data: [
+                            completed,
+                            pending,
+                            progress,
+                            overdue
+                        ],
+
+                        backgroundColor: [
+                            '#22c55e',
+                            '#f59e0b',
+                            '#3b82f6',
+                            '#ef4444'
+                        ],
+
+                        borderWidth: 0,
+                        hoverOffset: 12
+
+                    }]
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    cutout: '40%',
+
+                    plugins: {
+
+                        legend: {
+
+                            position: 'bottom',
+
+                            labels: {
+
+                                usePointStyle: true,
+                                padding: 22,
+
+                                font: {
+                                    size: 13
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        });
+
+    </script>
 
 </asp:Content>

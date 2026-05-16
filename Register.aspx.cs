@@ -15,48 +15,74 @@ namespace TeamSync
         {
             try
             {
-                // =========================
+                string fullName =
+                    txtName.Text.Trim();
+
+                string email =
+                    txtEmail.Text.Trim();
+
+                string password =
+                    txtPassword.Text.Trim();
+
+                string confirmPassword =
+                    txtConfirmPassword.Text.Trim();
+
+                // ====================================
                 // VALIDATION
-                // =========================
+                // ====================================
 
-                if (txtName.Text.Trim() == "" ||
-                    txtEmail.Text.Trim() == "" ||
-                    txtPassword.Text.Trim() == "")
+                if (fullName == "" ||
+                    email == "" ||
+                    password == "" ||
+                    confirmPassword == "")
                 {
                     lblMessage.ForeColor =
                         System.Drawing.Color.Red;
 
                     lblMessage.Text =
-                        "All fields are required!";
+                        "All fields are required.";
 
                     return;
                 }
 
-                // PASSWORD MATCH CHECK
+                // PASSWORD MATCH
 
-                if (txtPassword.Text.Trim() !=
-                    txtConfirmPassword.Text.Trim())
+                if (password != confirmPassword)
                 {
                     lblMessage.ForeColor =
                         System.Drawing.Color.Red;
 
                     lblMessage.Text =
-                        "Passwords do not match!";
+                        "Passwords do not match.";
 
                     return;
                 }
 
-                // =========================
+                // PASSWORD LENGTH
+
+                if (password.Length < 6)
+                {
+                    lblMessage.ForeColor =
+                        System.Drawing.Color.Red;
+
+                    lblMessage.Text =
+                        "Password must be at least 6 characters.";
+
+                    return;
+                }
+
+                // ====================================
                 // CHECK EXISTING EMAIL
-                // =========================
+                // ====================================
 
-                string checkQuery =
-                    "SELECT COUNT(*) FROM Users WHERE Email=@Email";
+                string checkQuery = @"
+                    SELECT COUNT(*)
+                    FROM Users
+                    WHERE Email=@Email";
 
                 SqlParameter[] checkParam =
                 {
-                    new SqlParameter("@Email",
-                    txtEmail.Text.Trim())
+                    new SqlParameter("@Email", email)
                 };
 
                 int exists = Convert.ToInt32(
@@ -72,22 +98,32 @@ namespace TeamSync
                         System.Drawing.Color.Red;
 
                     lblMessage.Text =
-                        "Email already exists!";
+                        "Email already exists.";
 
                     return;
                 }
 
-                // =========================
+                // ====================================
+                // DEFAULT PROFILE IMAGE
+                // ====================================
+
+                string defaultProfile =
+                    "~/Uploads/default.png";
+
+                // ====================================
                 // INSERT USER
-                // =========================
+                // ====================================
 
                 string query = @"
+
                     INSERT INTO Users
                     (
                         FullName,
                         Email,
-                        Password,
+                        PasswordHash,
                         Role,
+                        ProfileImage,
+                        IsActive,
                         CreatedAt
                     )
 
@@ -95,34 +131,56 @@ namespace TeamSync
                     (
                         @FullName,
                         @Email,
-                        @Password,
+                        @PasswordHash,
                         @Role,
+                        @ProfileImage,
+                        @IsActive,
                         GETDATE()
-                    )";
+                    )
+                ";
 
                 SqlParameter[] param =
                 {
-                    new SqlParameter("@FullName",
-                    txtName.Text.Trim()),
+                    new SqlParameter(
+                        "@FullName",
+                        fullName
+                    ),
 
-                    new SqlParameter("@Email",
-                    txtEmail.Text.Trim()),
+                    new SqlParameter(
+                        "@Email",
+                        email
+                    ),
 
-                    new SqlParameter("@Password",
-                    txtPassword.Text.Trim()),
+                    new SqlParameter(
+                        "@PasswordHash",
+                        password
+                    ),
 
-                    new SqlParameter("@Role",
-                    "Member")
+                    new SqlParameter(
+                        "@Role",
+                        "Member"
+                    ),
+
+                    new SqlParameter(
+                        "@ProfileImage",
+                        defaultProfile
+                    ),
+
+                    new SqlParameter(
+                        "@IsActive",
+                        true
+                    )
                 };
 
-                int result = DatabaseHelper.ExecuteQuery(
-                    query,
-                    param
-                );
+                int result =
+                    DatabaseHelper.ExecuteQuery(
+                        query,
+                        param
+                    );
 
-                // =========================
+                // ====================================
                 // SUCCESS
-                // =========================
+                // ====================================
 
                 if (result > 0)
                 {
@@ -137,7 +195,7 @@ namespace TeamSync
                         System.Drawing.Color.Red;
 
                     lblMessage.Text =
-                        "Registration failed!";
+                        "Registration failed.";
                 }
             }
             catch (Exception ex)
@@ -145,7 +203,8 @@ namespace TeamSync
                 lblMessage.ForeColor =
                     System.Drawing.Color.Red;
 
-                lblMessage.Text = ex.Message;
+                lblMessage.Text =
+                    ex.Message;
             }
         }
     }
